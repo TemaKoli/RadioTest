@@ -18,7 +18,7 @@ public class RadioTest {
     public void StationMoreMax() {
         Radio radio = new Radio();
 
-        radio.setCurrentStation(10);
+        radio.setCurrentStation(11);
 
         int expected = 0;
         int actual = radio.getCurrentStation();
@@ -97,7 +97,7 @@ public class RadioTest {
     @Test
     public void StationNextMoreMax() {
         Radio radio = new Radio();
-        radio.setCurrentStation(9);
+        radio.setCurrentStation(10);
 
         radio.next();
 
@@ -161,7 +161,7 @@ public class RadioTest {
 
         radio.prev();
 
-        int expected = 9;
+        int expected = 10;
         int actual = radio.getCurrentStation();
         Assertions.assertEquals(expected, actual);
     }
@@ -262,6 +262,65 @@ public class RadioTest {
 
         int expected = 0;
         int actual = radio.getCurrentVolume();
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void ConstructGetStation() {
+        Radio radio = new Radio(20);
+
+        radio.setCurrentStation(19);
+
+        int expected = 19;
+        int actual = radio.getCurrentStation();
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void ConstructNextStationBeforeMax() {
+        Radio radio = new Radio(20);
+        radio.setCurrentStation(19);
+
+        radio.next();
+
+        int expected = 0;
+        int actual = radio.getCurrentStation();
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void ConstructNextStation() {
+        Radio radio = new Radio(20);
+        radio.setCurrentStation(10);
+
+        radio.next();
+
+        int expected = 11;
+        int actual = radio.getCurrentStation();
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void ConstructPrevStation() {
+        Radio radio = new Radio(20);
+        radio.setCurrentStation(10);
+
+        radio.prev();
+
+        int expected = 9;
+        int actual = radio.getCurrentStation();
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void ConstructPrevStationBeforeMin() {
+        Radio radio = new Radio(20);
+        radio.setCurrentStation(0);
+
+        radio.prev();
+
+        int expected = 19;
+        int actual = radio.getCurrentStation();
         Assertions.assertEquals(expected, actual);
     }
 }
